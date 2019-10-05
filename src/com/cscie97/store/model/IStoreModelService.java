@@ -12,5 +12,7 @@ public interface IStoreModelService {
 
     Shelf createAShelf(String storeId, String aisleNumber, String shelfId, String shelfName, String level, String shelfDescription, String temperature);
 
+    Shelf getShelfByStoreIdAisleNumShelfId(String storeId, String aisleNumber, String shelfId);
+
 }
 

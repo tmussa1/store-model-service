@@ -60,5 +60,13 @@ public class StoreModelService implements IStoreModelService {
         return shelf;
     }
 
+    @Override
+    public Shelf getShelfByStoreIdAisleNumShelfId(String storeId, String aisleNumber, String shelfId) {
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        return aisle.getShelves().stream().filter(shelf -> shelf.getShelfId().equals(shelfId)).findAny().get();
+    }
+
+
+
 
 }

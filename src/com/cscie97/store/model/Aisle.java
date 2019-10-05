@@ -32,4 +32,8 @@ public class Aisle {
     public Location getLocation() {
         return location;
     }
+
+    public List<Shelf> getShelves() {
+        return shelves;
+    }
 }
