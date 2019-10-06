@@ -2,6 +2,11 @@ package com.cscie97.store.model;
 
 public class StoreUtil {
 
+    /**
+     * We can assume that the aisles are by default in the floor unless specified
+     * @param location
+     * @return
+     */
     public static Location convertLocationToEnum(String location) {
         Location locationEnum = null;
         switch(location.toUpperCase()){
@@ -35,6 +40,12 @@ public class StoreUtil {
         return levelEnum;
     }
 
+    /**
+     * Temperature is by default ambient
+     * @param temperature
+     * @return
+     */
+
     public static Temperature convertTemperatureToEnum(String temperature){
         Temperature temperatureEnum = null;
         switch(temperature.toUpperCase()){
@@ -57,5 +68,26 @@ public class StoreUtil {
                 temperatureEnum = Temperature.AMBIENT;
         }
         return temperatureEnum;
+    }
+
+    /**
+     * Customer that is not registered is by default a guest
+     * @param customerType
+     * @return
+     */
+    public static CustomerType convertCustomerTypeToEnum(String customerType){
+        CustomerType customerEnum = null;
+        switch(customerType.toUpperCase()){
+            case "REGISTERED":
+                customerEnum = CustomerType.REGISTERED;
+                break;
+            case "GUEST":
+                customerEnum = CustomerType.GUEST;
+                break;
+            default:
+                customerEnum = CustomerType.GUEST;
+                break;
+        }
+        return customerEnum;
     }
 }

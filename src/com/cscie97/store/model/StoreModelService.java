@@ -154,5 +154,24 @@ public class StoreModelService implements IStoreModelService {
         return product;
     }
 
+    @Override
+    public Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException {
+        Customer customer = new Customer(customerId, firstName, lastName,
+                StoreUtil.convertCustomerTypeToEnum(type), emailAddress, accountAddress);
+        duplicateCustomerValidation(customerId, accountAddress);
+        this.customers.add(customer);
+        return customer;
+    }
+
+    private void duplicateCustomerValidation(String customerId, String accountAddress) throws StoreException {
+        Customer duplicateCustomer = this.customers.stream()
+                .filter(aCustomer -> aCustomer.getCustomerId().equals(customerId)
+                        && aCustomer.getAccountAddress().equals(accountAddress))
+                .findAny().get();
+        if(duplicateCustomer != null){
+            throw new StoreException("A customer with the same id and account address exists");
+        }
+    }
+
 
 }

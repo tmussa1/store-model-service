@@ -23,5 +23,8 @@ public interface IStoreModelService {
     Product createAProduct(int productId, String productName, String productDescription, int size, String category, int price, String temperature);
 
     Product getProductById(int productId) throws StoreException;
+
+    Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException;
+
 }
 
