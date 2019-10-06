@@ -254,9 +254,56 @@ public class StoreModelService implements IStoreModelService {
         inventoryInTheShelf.setCount(inventoryInTheShelf.getCount() - count);
         shelf.addInventoryToShelf(inventoryInTheShelf);
         this.inventoryMap.replace(inventoryOverAll.getInventoryId(), inventoryOverAll);
-        return null;
+        return customer.getBasket();
     }
 
+    /**
+     * The same logic as adding. Inventory with updated count replaces existing. The basket also reflected a decreased
+     * count if there are remaining items with the same product id, it gets completely removed from the basket if there
+     * are not.
+     * @param basketId
+     * @param productId
+     * @param countReturned
+     * @return
+     * @throws StoreException
+     */
+    @Override
+    public Basket removeItemFromBasket(String basketId, String productId, int countReturned) throws StoreException {
+        Customer customer = getCustomerAssociatedWithABasket(basketId);
+        Product product = this.productMap.get(productId);
+        if(product == null){
+            throw new StoreException("The product you are trying to put back is not from this store");
+        }
+        Basket basket = customer.getBasket();
+        basket.removeProductFromBasket(product, countReturned);
+        customer.setBasket(basket);
+        Inventory inventoryOverAll = getInventoryByProductId(productId);
+        inventoryOverAll.setCount(inventoryOverAll.getCount() + countReturned);
+        Shelf shelf = getShelfByStoreIdAisleNumShelfId(inventoryOverAll.getInventoryLocation().getStoreId(),
+                inventoryOverAll.getInventoryLocation().getAisleNumber(),
+                inventoryOverAll.getInventoryLocation().getShelfId());
+        Inventory inventoryInTheShelf = shelf.getInventoryInTheShelfByInventoryId(inventoryOverAll.getInventoryId());
+        inventoryInTheShelf.setCount(inventoryInTheShelf.getCount() + countReturned);
+        shelf.addInventoryToShelf(inventoryInTheShelf);
+        this.inventoryMap.replace(inventoryOverAll.getInventoryId(), inventoryOverAll);
+        return customer.getBasket();
+    }
+
+    @Override
+    public Customer clearBasketAndRemoveAssociationWithACustomer(String basketId) throws StoreException {
+        Customer customer = getCustomerAssociatedWithABasket(basketId);
+        Basket basket = getBasketOfACustomer(customer.getCustomerId());
+        basket.setProductsMap(null);
+        customer.setBasket(null);
+        return customer;
+    }
+
+    @Override
+    public Map<Product, Integer> getBasketItems(String basketId) throws StoreException {
+        Customer customer = getCustomerAssociatedWithABasket(basketId);
+        Basket basket = getBasketOfACustomer(customer.getCustomerId());
+        return basket.getProductsMap();
+    }
 
 
 }

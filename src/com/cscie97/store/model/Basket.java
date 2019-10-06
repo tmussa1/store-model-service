@@ -17,12 +17,28 @@ public class Basket {
 
     public void addProductToBasket(Product product, int quantity){
         if(productsMap.containsKey(product)){
-            productsMap.put(product, productsMap.get(product) + quantity);
+            productsMap.replace(product, productsMap.get(product) + quantity);
         } else {
             productsMap.put(product, quantity);
         }
     }
+
+    public void removeProductFromBasket(Product product, int count){
+        if(productsMap.containsKey(product) && productsMap.get(product) == count){
+            productsMap.remove(product);
+        } else {
+            productsMap.replace(product, productsMap.get(product) - count);
+        }
+    }
     public String getBasketId() {
         return basketId;
+    }
+
+    public Map<Product, Integer> getProductsMap() {
+        return productsMap;
+    }
+
+    public void setProductsMap(Map<Product, Integer> productsMap) {
+        this.productsMap = productsMap;
     }
 }

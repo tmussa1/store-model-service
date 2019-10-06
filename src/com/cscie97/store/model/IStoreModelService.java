@@ -1,5 +1,7 @@
 package com.cscie97.store.model;
 
+import java.util.Map;
+
 public interface IStoreModelService {
 
     Store createAStore(String storeId, String storeName, String storeAddress) throws StoreException;
@@ -37,5 +39,11 @@ public interface IStoreModelService {
     Basket addItemToBasket(String basketId, String productId, int count) throws StoreException;
 
     Inventory getInventoryByProductId(String productId) throws StoreException;
+
+    Basket removeItemFromBasket(String basketId, String productId, int countReturned) throws StoreException;
+
+    Customer clearBasketAndRemoveAssociationWithACustomer(String basketId) throws StoreException;
+
+    Map<Product, Integer> getBasketItems(String basketId) throws StoreException;
 }
 
