@@ -1,11 +1,15 @@
 package com.cscie97.store.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Shelf {
     private String shelfId;
     private String shelfName;
     private Level level;
     private String shelfDescription;
     private Temperature temperature;
+    private List<Inventory> inventoryList;
 
     public Shelf(String shelfId, String shelfName, Level level, String shelfDescription, Temperature temperature) {
         this.shelfId = shelfId;
@@ -13,6 +17,11 @@ public class Shelf {
         this.level = level;
         this.shelfDescription = shelfDescription;
         this.temperature = temperature;
+        this.inventoryList = new ArrayList<>();
+    }
+
+    public void addInventoryToShelf(Inventory inventory){
+        this.inventoryList.add(inventory);
     }
 
     public String getShelfId() {
@@ -33,5 +42,9 @@ public class Shelf {
 
     public Temperature getTemperature() {
         return temperature;
+    }
+
+    public List<Inventory> getInventoryList() {
+        return inventoryList;
     }
 }
