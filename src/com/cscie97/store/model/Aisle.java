@@ -7,10 +7,10 @@ public class Aisle {
 
     private String aisleNumber;
     private String aisleDescription;
-    private Location location;
+    private LocationType location;
     private List<Shelf> shelves;
 
-    public Aisle(String aisleNumber, String aisleDescription, Location location) {
+    public Aisle(String aisleNumber, String aisleDescription, LocationType location) {
         this.aisleNumber = aisleNumber;
         this.aisleDescription = aisleDescription;
         this.location = location;
@@ -29,7 +29,7 @@ public class Aisle {
         return aisleDescription;
     }
 
-    public Location getLocation() {
+    public LocationType getLocation() {
         return location;
     }
 

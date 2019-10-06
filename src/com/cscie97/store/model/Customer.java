@@ -1,6 +1,8 @@
 package com.cscie97.store.model;
 
 
+import java.time.LocalDateTime;
+
 public class Customer {
 
     private String customerId;
@@ -9,6 +11,9 @@ public class Customer {
     private CustomerType customerType;
     private String emailAddress;
     private String accountAddress;
+    private InventoryLocation customerLocation;
+    private LocalDateTime timeLastSeen;
+    private Basket basket;
 
     public Customer(String customerId, String firstName, String lastName, CustomerType customerType, String emailAddress, String accountAddress) {
         this.customerId = customerId;
@@ -41,5 +46,30 @@ public class Customer {
 
     public String getAccountAddress() {
         return accountAddress;
+    }
+
+    public InventoryLocation getCustomerLocation() {
+        return customerLocation;
+    }
+
+    public LocalDateTime getTimeLastSeen() {
+        return timeLastSeen;
+    }
+
+    public void setCustomerLocation(InventoryLocation customerLocation) {
+        setTimeLastSeen(LocalDateTime.now());
+        this.customerLocation = customerLocation;
+    }
+
+    public void setTimeLastSeen(LocalDateTime timeLastSeen) {
+        this.timeLastSeen = timeLastSeen;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

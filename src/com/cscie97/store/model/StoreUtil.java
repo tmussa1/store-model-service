@@ -7,17 +7,17 @@ public class StoreUtil {
      * @param location
      * @return
      */
-    public static Location convertLocationToEnum(String location) {
-        Location locationEnum = null;
+    public static LocationType convertLocationToEnum(String location) {
+        LocationType locationEnum = null;
         switch(location.toUpperCase()){
             case "FLOOR":
-                locationEnum =  Location.FLOOR;
+                locationEnum =  LocationType.FLOOR;
                 break;
             case "STOREROOM":
-                locationEnum = Location.STORE_ROOM;
+                locationEnum = LocationType.STORE_ROOM;
                 break;
             default:
-                locationEnum =  Location.FLOOR;
+                locationEnum =  LocationType.FLOOR;
         }
         return locationEnum;
     }

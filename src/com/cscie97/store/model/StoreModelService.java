@@ -1,9 +1,6 @@
 package com.cscie97.store.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StoreModelService implements IStoreModelService {
 
@@ -49,7 +46,7 @@ public class StoreModelService implements IStoreModelService {
     @Override
     public Aisle createAisle(String storeId, String aisleNumber, String aisleDescription, String location) throws StoreException {
         Store store = getStoreById(storeId);
-        Location locationEnum = StoreUtil.convertLocationToEnum(location);
+        LocationType locationEnum = StoreUtil.convertLocationToEnum(location);
         Aisle aisle = new Aisle(aisleNumber, aisleDescription,locationEnum);
         store.addAisleToAStore(aisle);
         return aisle;
@@ -154,15 +151,6 @@ public class StoreModelService implements IStoreModelService {
         return product;
     }
 
-    @Override
-    public Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException {
-        Customer customer = new Customer(customerId, firstName, lastName,
-                StoreUtil.convertCustomerTypeToEnum(type), emailAddress, accountAddress);
-        duplicateCustomerValidation(customerId, accountAddress);
-        this.customers.add(customer);
-        return customer;
-    }
-
     private void duplicateCustomerValidation(String customerId, String accountAddress) throws StoreException {
         Customer duplicateCustomer = this.customers.stream()
                 .filter(aCustomer -> aCustomer.getCustomerId().equals(customerId)
@@ -172,6 +160,103 @@ public class StoreModelService implements IStoreModelService {
             throw new StoreException("A customer with the same id and account address exists");
         }
     }
+
+    @Override
+    public Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException {
+        Customer customer = new Customer(customerId, firstName, lastName,
+                StoreUtil.convertCustomerTypeToEnum(type), emailAddress, accountAddress);
+        duplicateCustomerValidation(customerId, accountAddress);
+        this.customers.add(customer);
+        return customer;
+    }
+
+    @Override
+    public Customer getCustomerById(String customerId) throws StoreException {
+        Customer customer = this.customers.stream().filter(aCustomer ->
+                aCustomer.getCustomerId().equals(customerId)).findAny().get();
+        if(customer == null){
+            throw new StoreException("A customer with the requested id doesn't exist");
+        }
+        return customer;
+    }
+
+    @Override
+    public InventoryLocation updateCustomerLocation(String customerId, String storeId, String aisleNumber) throws StoreException {
+        InventoryLocation customerLocation = new InventoryLocation(storeId, aisleNumber, "");
+        Customer customer = getCustomerById(customerId);
+        customer.setCustomerLocation(customerLocation);
+        return customer.getCustomerLocation();
+    }
+
+    @Override
+    public Basket getBasketOfACustomer(String customerId) throws StoreException {
+        Customer customer = getCustomerById(customerId);
+        Basket basket = customer.getBasket();
+        if(basket == null){
+            customer.setBasket(createBasketForACustomer(customerId, UUID.randomUUID().toString()));
+        }
+        return customer.getBasket();
+    }
+
+    @Override
+    public Basket createBasketForACustomer(String customerId, String basketId) throws StoreException {
+        Customer customer = getCustomerById(customerId);
+        Basket basket = new Basket(basketId);
+        customer.setBasket(basket);
+        return customer.getBasket();
+    }
+
+    private Customer getCustomerAssociatedWithABasket(String basketId) throws StoreException {
+        Customer customer = this.customers.stream()
+                .filter(aCustomer -> aCustomer.getBasket().getBasketId().equals(basketId))
+                .findAny().get();
+        if(customer == null){
+            throw new StoreException("There is no customer associated with this basket id");
+        }
+        return customer;
+    }
+
+    @Override
+    public Inventory getInventoryByProductId(String productId) throws StoreException {
+         Inventory inventory = inventoryMap.values().stream()
+                .filter(anInventory -> anInventory.getProduct().getProductId() == Integer.parseInt(productId))
+                .findAny().get();
+         if(inventory == null){
+             throw new StoreException("An inventory with the provided product id doesn't exist");
+         }
+        return inventory;
+    }
+
+    /**
+     * The method that gets called to add inventory to a shelf has logic if it is existing inventory and replaces it if it is
+     * @param basketId
+     * @param productId
+     * @param count
+     * @return
+     * @throws StoreException
+     */
+    @Override
+    public Basket addItemToBasket(String basketId, String productId, int count) throws StoreException {
+        Customer customer = getCustomerAssociatedWithABasket(basketId);
+        Product product = this.productMap.get(productId);
+        if(product == null){
+            throw new StoreException("The product you are trying to pick doesn't exist");
+        }
+        Basket basket = customer.getBasket();
+        basket.addProductToBasket(product, count);
+        customer.setBasket(basket);
+        Inventory inventoryOverAll = getInventoryByProductId(productId);
+        inventoryOverAll.setCount(inventoryOverAll.getCount() - count);
+        Shelf shelf = getShelfByStoreIdAisleNumShelfId(inventoryOverAll.getInventoryLocation().getStoreId(),
+                inventoryOverAll.getInventoryLocation().getAisleNumber(),
+                inventoryOverAll.getInventoryLocation().getShelfId());
+        Inventory inventoryInTheShelf = shelf.getInventoryInTheShelfByInventoryId(inventoryOverAll.getInventoryId());
+        inventoryInTheShelf.setCount(inventoryInTheShelf.getCount() - count);
+        shelf.addInventoryToShelf(inventoryInTheShelf);
+        this.inventoryMap.replace(inventoryOverAll.getInventoryId(), inventoryOverAll);
+        return null;
+    }
+
 
 
 }

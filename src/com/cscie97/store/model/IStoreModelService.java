@@ -26,5 +26,16 @@ public interface IStoreModelService {
 
     Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException;
 
+    Customer getCustomerById(String customerId) throws StoreException;
+
+    InventoryLocation updateCustomerLocation(String customerId, String storeId, String aisleNumber) throws StoreException;
+
+    Basket getBasketOfACustomer(String customerId) throws StoreException;
+
+    Basket createBasketForACustomer(String customerId, String basketId) throws StoreException;
+
+    Basket addItemToBasket(String basketId, String productId, int count) throws StoreException;
+
+    Inventory getInventoryByProductId(String productId) throws StoreException;
 }
 

@@ -20,8 +20,23 @@ public class Shelf {
         this.inventoryList = new ArrayList<>();
     }
 
-    public void addInventoryToShelf(Inventory inventory){
-        this.inventoryList.add(inventory);
+    public void addInventoryToShelf(Inventory inventory) throws StoreException {
+        Inventory inventoryExisting = getInventoryInTheShelfByInventoryId(inventory.getInventoryId());
+        if(inventoryExisting != null){
+            this.inventoryList.set(inventoryList.indexOf(inventoryExisting), inventory);
+        } else {
+            this.inventoryList.add(inventory);
+        }
+    }
+
+    public Inventory getInventoryInTheShelfByInventoryId(int inventoryId) throws StoreException {
+        Inventory inventory = this.inventoryList.stream()
+                .filter(anInventory -> anInventory.getInventoryId() == inventoryId)
+                .findAny().get();
+        if(inventory == null){
+            throw new StoreException("An inventory with the requested id doesn't exist");
+        }
+        return inventory;
     }
 
     public String getShelfId() {
