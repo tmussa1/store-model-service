@@ -39,4 +39,17 @@ public class Product {
     public Temperature getTemperature() {
         return temperature;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", volume=" + volume +
+                ", temperature=" + temperature +
+                '}';
+    }
 }

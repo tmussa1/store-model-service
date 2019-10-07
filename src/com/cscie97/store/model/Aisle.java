@@ -47,4 +47,13 @@ public class Aisle {
     public List<Shelf> getShelves() {
         return shelves;
     }
+
+    @Override
+    public String toString() {
+        return "Aisle{" +
+                "aisleNumber='" + aisleNumber + '\'' +
+                ", aisleDescription='" + aisleDescription + '\'' +
+                ", location=" + location +
+                '}';
+    }
 }

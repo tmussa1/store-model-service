@@ -41,4 +41,11 @@ public class Basket {
     public void setProductsMap(Map<Product, Integer> productsMap) {
         this.productsMap = productsMap;
     }
+
+    @Override
+    public String toString() {
+        return "Basket{" +
+                "basketId='" + basketId + '\'' +
+                '}';
+    }
 }

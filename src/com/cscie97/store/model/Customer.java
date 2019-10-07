@@ -72,4 +72,18 @@ public class Customer {
     public void setBasket(Basket basket) {
         this.basket = basket;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId='" + customerId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", customerType=" + customerType +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", accountAddress='" + accountAddress + '\'' +
+                ", timeLastSeen=" + timeLastSeen +
+                ", basket=" + basket +
+                '}';
+    }
 }

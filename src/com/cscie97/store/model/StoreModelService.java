@@ -8,23 +8,26 @@ public class StoreModelService implements IStoreModelService {
     private List<Store> stores;
     private Map<Integer, Inventory> inventoryMap;
     private Map<Integer, Product> productMap;
+    private static StoreModelService instance;
 
-    public StoreModelService() {
+    private StoreModelService() {
         this.customers = new ArrayList<>();
         this.stores = new ArrayList<>();
         this.inventoryMap = new HashMap<>();
         this.productMap = new HashMap<>();
     }
 
-    @Override
-    public Store createAStore(String storeId, String storeName, String storeAddress) throws StoreException {
-        String [] addressArray = storeAddress.split(" ");
-        if(addressArray.length != 3){
-            throw new StoreException("You need to pass in street, city and state in that order");
+    public static StoreModelService getInstance(){
+        if(instance == null){
+            instance = new StoreModelService();
         }
-        Address address = new Address(addressArray[0], addressArray[1], addressArray[2]);
+        return instance;
+    }
+
+    @Override
+    public Store createAStore(String storeId, String storeName, Address storeAddress) throws StoreException {
         checkValidityOfStoreId(storeId);
-        return new Store(storeId, storeName, address);
+        return new Store(storeId, storeName, storeAddress);
     }
 
     private void checkValidityOfStoreId(String storeId) throws StoreException {

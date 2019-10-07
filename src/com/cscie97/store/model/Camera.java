@@ -32,4 +32,13 @@ public class Camera implements ISensor {
     public String getSensorType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "Camera{" +
+                "sensorId='" + sensorId + '\'' +
+                ", sensorName='" + sensorName + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface IStoreModelService {
 
-    Store createAStore(String storeId, String storeName, String storeAddress) throws StoreException;
+    Store createAStore(String storeId, String storeName, Address storeAddress) throws StoreException;
 
     Store getStoreById(String storeId) throws StoreException;
 
