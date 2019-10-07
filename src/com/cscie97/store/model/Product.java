@@ -2,7 +2,7 @@ package com.cscie97.store.model;
 
 public class Product {
 
-    private int productId;
+    private String productId;
     private String productName;
     private String productDescription;
     private String category;
@@ -10,7 +10,7 @@ public class Product {
     private double volume;
     private Temperature temperature;
 
-    public Product(int productId, String productName, String productDescription, String category, int price, double volume, Temperature temperature) {
+    public Product(String productId, String productName, String productDescription, String category, int price, double volume, Temperature temperature) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -20,7 +20,7 @@ public class Product {
         this.temperature = temperature;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
@@ -38,6 +38,14 @@ public class Product {
 
     public Temperature getTemperature() {
         return temperature;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     @Override

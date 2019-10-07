@@ -48,14 +48,35 @@ public class CommandProcessor {
                     return ExceptionUtil.outputException(lineNumber, "Shelf not created", e);
                 }
             case "show-shelf":
-                String [] storeAisleShelf = commandWords[1].split(":");
                 try {
+                    String [] storeAisleShelf = commandWords[1].split(":");
                     return ShowUtil.showShelfDetails(storeModelService, storeAisleShelf[0], storeAisleShelf[1], storeAisleShelf[2]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Shelf not found", e);
                 }
             case "define-product":
-
+                    return CreateUtil.createProduct(storeModelService, commandWords[1], commandWords[3],
+                            commandWords[5],commandWords[7],commandWords[9], commandWords[11], commandWords[13]);
+            case "show-product":
+                try {
+                    return ShowUtil.showProductDetails(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Product not found", e);
+                }
+            case "define-inventory":
+                String [] storeAisleShelf = commandWords[3].split(":");
+                try {
+                    return CreateUtil.createInventory(storeModelService, storeAisleShelf[0], storeAisleShelf[1],
+                            storeAisleShelf[2],  commandWords[3], commandWords[5], commandWords[7], commandWords[9]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Inventory creation failed", e);
+                }
+            case "show-inventory":
+                try {
+                    return ShowUtil.showInventoryDetails(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Inventory with the id not found", e);
+                }
         }
         return DetailsUtil.endOfScript();
     }

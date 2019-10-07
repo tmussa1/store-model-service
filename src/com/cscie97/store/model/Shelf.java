@@ -29,9 +29,9 @@ public class Shelf {
         }
     }
 
-    public Inventory getInventoryInTheShelfByInventoryId(int inventoryId) throws StoreException {
+    public Inventory getInventoryInTheShelfByInventoryId(String inventoryId) throws StoreException {
         Inventory inventory = this.inventoryList.stream()
-                .filter(anInventory -> anInventory.getInventoryId() == inventoryId)
+                .filter(anInventory -> anInventory.getInventoryId().equals(inventoryId))
                 .findAny().get();
         if(inventory == null){
             throw new StoreException("An inventory with the requested id doesn't exist");

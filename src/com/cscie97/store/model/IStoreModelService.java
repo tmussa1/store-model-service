@@ -16,15 +16,15 @@ public interface IStoreModelService {
 
     Shelf getShelfByStoreIdAisleNumShelfId(String storeId, String aisleNumber, String shelfId) throws StoreException;
 
-    Inventory createInventory(int inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException;
+    Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException;
 
-    Inventory getInventoryById(int inventoryId) throws StoreException;
+    Inventory getInventoryById(String inventoryId) throws StoreException;
 
-    int UpdateInventoryCount(int inventoryId, int difference) throws StoreException;
+    int UpdateInventoryCount(String inventoryId, int difference) throws StoreException;
 
-    Product createAProduct(int productId, String productName, String productDescription, int size, String category, int price, String temperature);
+    Product createAProduct(String productId, String productName, String productDescription, int size, String category, int price, String temperature);
 
-    Product getProductById(int productId) throws StoreException;
+    Product getProductById(String productId) throws StoreException;
 
     Customer createCustomer(String customerId, String firstName, String lastName, String type, String emailAddress, String accountAddress) throws StoreException;
 

@@ -6,8 +6,8 @@ public class StoreModelService implements IStoreModelService {
 
     private List<Customer> customers;
     private List<Store> stores;
-    private Map<Integer, Inventory> inventoryMap;
-    private Map<Integer, Product> productMap;
+    private Map<String, Inventory> inventoryMap;
+    private Map<String, Product> productMap;
     private static StoreModelService instance;
 
     private StoreModelService() {
@@ -86,7 +86,7 @@ public class StoreModelService implements IStoreModelService {
     }
 
     @Override
-    public Inventory createInventory(int inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException {
+    public Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException {
         Product product = productMap.get(productId);
         if(product == null){
             throw new StoreException("Inventory can not be created for a product that is not defined");
@@ -100,7 +100,7 @@ public class StoreModelService implements IStoreModelService {
     }
 
     @Override
-    public Inventory getInventoryById(int inventoryId) throws StoreException {
+    public Inventory getInventoryById(String inventoryId) throws StoreException {
         Inventory inventory = inventoryMap.get(inventoryId);
         if(inventory == null){
             throw new StoreException("Requested inventory not found in all of the stores");
@@ -118,7 +118,7 @@ public class StoreModelService implements IStoreModelService {
      * @throws StoreException
      */
     @Override
-    public int UpdateInventoryCount(int inventoryId, int difference) throws StoreException {
+    public int UpdateInventoryCount(String inventoryId, int difference) throws StoreException {
         Inventory inventoryFromAnyStore = inventoryMap.get(inventoryId);
         if(inventoryFromAnyStore == null){
             throw new StoreException("The inventory that you are trying to update the count of doesn't exist in the stores");
@@ -127,7 +127,7 @@ public class StoreModelService implements IStoreModelService {
                 inventoryFromAnyStore.getInventoryLocation().getAisleNumber(),
                 inventoryFromAnyStore.getInventoryLocation().getShelfId());
         Inventory inventoryInTheShelf = shelf.getInventoryList().stream()
-                .filter(inventory -> inventory.getInventoryId() == inventoryId).findAny().get();
+                .filter(inventory -> inventory.getInventoryId().equals(inventoryId)).findAny().get();
         if(inventoryInTheShelf == null){
             throw new StoreException("The inventory is not placed in any of the shelves");
         }
@@ -137,7 +137,7 @@ public class StoreModelService implements IStoreModelService {
     }
 
     @Override
-    public Product createAProduct(int productId, String productName, String productDescription, int size, String category, int price, String temperature) {
+    public Product createAProduct(String productId, String productName, String productDescription, int size, String category, int price, String temperature) {
         double volume = Math.pow(size, 3);
         Product product = new Product(productId, productName, productDescription, category, price, volume,
                 StoreUtil.convertTemperatureToEnum(temperature));
@@ -146,7 +146,7 @@ public class StoreModelService implements IStoreModelService {
     }
 
     @Override
-    public Product getProductById(int productId) throws StoreException {
+    public Product getProductById(String productId) throws StoreException {
         Product product = this.productMap.get(productId);
         if(product == null){
             throw new StoreException("A product with the requested id doesn't exist");
@@ -222,7 +222,7 @@ public class StoreModelService implements IStoreModelService {
     @Override
     public Inventory getInventoryByProductId(String productId) throws StoreException {
          Inventory inventory = inventoryMap.values().stream()
-                .filter(anInventory -> anInventory.getProduct().getProductId() == Integer.parseInt(productId))
+                .filter(anInventory -> anInventory.getProduct().getProductId().equals(productId))
                 .findAny().get();
          if(inventory == null){
              throw new StoreException("An inventory with the provided product id doesn't exist");

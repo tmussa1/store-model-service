@@ -2,13 +2,13 @@ package com.cscie97.store.model;
 
 public class Inventory {
 
-    private int inventoryId;
+    private String inventoryId;
     private Product product;
     private int count;
     private int capacity;
     private InventoryLocation inventoryLocation;
 
-    public Inventory(int inventoryId, Product product, int count, int capacity, InventoryLocation inventoryLocation) {
+    public Inventory(String inventoryId, Product product, int count, int capacity, InventoryLocation inventoryLocation) {
         this.inventoryId = inventoryId;
         this.product = product;
         this.count = count;
@@ -29,7 +29,7 @@ public class Inventory {
         return count >= 0 && count <= getCapacity();
     }
 
-    public int getInventoryId() {
+    public String getInventoryId() {
         return inventoryId;
     }
 

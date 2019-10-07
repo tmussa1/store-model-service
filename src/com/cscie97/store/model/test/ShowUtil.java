@@ -2,6 +2,9 @@ package com.cscie97.store.model.test;
 
 import com.cscie97.store.model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ShowUtil {
 
@@ -19,4 +22,17 @@ public class ShowUtil {
         Shelf shelf = storeModelService.getShelfByStoreIdAisleNumShelfId(storeId, aisleNumber, shelfId );
         return DetailsUtil.outputDetails("Shelf ", shelf.getShelfName(), aisleNumber, shelf.getInventoryList());
     }
+
+    public static String showProductDetails(IStoreModelService storeModelService, String productId) throws StoreException {
+        Product product = storeModelService.getProductById(productId);
+        return DetailsUtil.outputDetails("Product " , product.getProductName(), product.getCategory(), List.of(product));
+    }
+
+    public static String showInventoryDetails(IStoreModelService storeModelService, String inventoryId) throws StoreException {
+        Inventory inventory = storeModelService.getInventoryById(inventoryId);
+
+        return DetailsUtil.outputDetails("Inventory ", String.valueOf(inventory.getInventoryId()),
+                inventory.getInventoryLocation().getAisleNumber(), List.of(inventory.getProduct()));
+    }
+
 }
