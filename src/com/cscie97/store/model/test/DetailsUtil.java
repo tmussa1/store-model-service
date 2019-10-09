@@ -29,7 +29,10 @@ public class DetailsUtil {
     }
 
     public static String outputConfirmation(String name) {
-        return name + " has been createed ";
+        return name + " has been created ";
+    }
+    public static String outputUpdateConfirmation(String name) {
+        return name + " has been updated ";
     }
 
     public static String endOfScript(){

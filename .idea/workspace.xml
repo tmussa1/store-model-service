@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="373d861c-0c9f-4ca8-88ac-3fc931200eba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/IStoreModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/IStoreModelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/Shelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/Shelf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/StoreModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/StoreModelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/test/CommandProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/test/CommandProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/test/CreateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/test/CreateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java" afterDir="false" />
-    </list>
+    <list default="true" id="373d861c-0c9f-4ca8-88ac-3fc931200eba" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +15,8 @@
       <file leaf-file-name="CommandProcessor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/CommandProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="74" column="16" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+            <state relative-caret-position="232">
+              <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,8 +57,8 @@
       <file leaf-file-name="ShowUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="129">
+              <caret line="25" column="123" lean-forward="true" selection-start-line="25" selection-start-column="123" selection-end-line="25" selection-end-column="123" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -191,8 +182,8 @@
         <option value="$PROJECT_DIR$/src/com/cscie97/store/model/IStoreModelService.java" />
         <option value="$PROJECT_DIR$/src/com/cscie97/store/model/Shelf.java" />
         <option value="$PROJECT_DIR$/src/com/cscie97/store/model/StoreModelService.java" />
-        <option value="$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java" />
         <option value="$PROJECT_DIR$/src/com/cscie97/store/model/test/CreateUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java" />
         <option value="$PROJECT_DIR$/src/com/cscie97/store/model/test/CommandProcessor.java" />
       </list>
     </option>
@@ -206,7 +197,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="302" />
     <option name="width" value="697" />
     <option name="height" value="735" />
@@ -296,15 +287,15 @@
       <option name="presentableId" value="Default" />
       <updated>1570311306022</updated>
       <workItem from="1570311309794" duration="19971000" />
-      <workItem from="1570406885299" duration="11766000" />
+      <workItem from="1570406885299" duration="11935000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31737000" />
+    <option name="totallyTimeSpent" value="31906000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -317,7 +308,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.20787401" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.24566929" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
@@ -338,33 +329,33 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.11968504" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -702,16 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/CreateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -723,10 +704,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/ShowUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="25" column="123" lean-forward="true" selection-start-line="25" selection-start-column="123" selection-end-line="25" selection-end-column="123" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/cscie97/store/model/test/CommandProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="74" column="16" selection-start-line="74" selection-start-column="16" selection-end-line="74" selection-end-column="16" />
+        <state relative-caret-position="232">
+          <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

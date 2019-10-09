@@ -77,6 +77,8 @@ public class CommandProcessor {
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Inventory with the id not found", e);
                 }
+            case "update-inventory":
+                    return UpdateUtil.
         }
         return DetailsUtil.endOfScript();
     }

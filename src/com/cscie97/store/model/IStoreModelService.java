@@ -20,7 +20,7 @@ public interface IStoreModelService {
 
     Inventory getInventoryById(String inventoryId) throws StoreException;
 
-    int UpdateInventoryCount(String inventoryId, int difference) throws StoreException;
+    int updateInventoryCount(String inventoryId, int difference) throws StoreException;
 
     Product createAProduct(String productId, String productName, String productDescription, int size, String category, int price, String temperature);
 

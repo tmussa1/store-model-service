@@ -118,7 +118,7 @@ public class StoreModelService implements IStoreModelService {
      * @throws StoreException
      */
     @Override
-    public int UpdateInventoryCount(String inventoryId, int difference) throws StoreException {
+    public int updateInventoryCount(String inventoryId, int difference) throws StoreException {
         Inventory inventoryFromAnyStore = inventoryMap.get(inventoryId);
         if(inventoryFromAnyStore == null){
             throw new StoreException("The inventory that you are trying to update the count of doesn't exist in the stores");
