@@ -1,7 +1,6 @@
 package com.cscie97.store.model.test;
 
 import com.cscie97.store.model.IStoreModelService;
-import com.cscie97.store.model.Store;
 import com.cscie97.store.model.StoreException;
 import com.cscie97.store.model.StoreModelService;
 
@@ -15,7 +14,8 @@ public class CommandProcessor {
         switch(commandWords[0].toLowerCase()){
             case "define-store":
                    try {
-                       return CreateUtil.createStore(storeModelService, commandWords[1], commandWords[3], commandWords[5], commandWords[6], commandWords[7]);
+                       return CreateUtil.createStore(storeModelService, commandWords[1], commandWords[3],
+                               commandWords[5], commandWords[6], commandWords[7]);
                    } catch (StoreException e) {
                        return ExceptionUtil.outputException(lineNumber, "Store created failed" , e);
                    }
@@ -28,7 +28,8 @@ public class CommandProcessor {
             case "define-aisle":
                 try{
                     String [] storeAisle = commandWords[1].split(":");
-                    return CreateUtil.createAisle(storeModelService, storeAisle[0], storeAisle[1], commandWords[3], commandWords[5]);
+                    return CreateUtil.createAisle(storeModelService, storeAisle[0], storeAisle[1],
+                            commandWords[3], commandWords[5]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Aisle creation failed", e);
                 }
@@ -42,7 +43,8 @@ public class CommandProcessor {
             case "define-shelf":
                 try {
                     String [] storeAisleShelf = commandWords[1].split(":");
-                    return CreateUtil.createShelf(storeModelService, storeAisleShelf[0], storeAisleShelf[1], storeAisleShelf[2],
+                    return CreateUtil.createShelf(storeModelService, storeAisleShelf[0], storeAisleShelf[1],
+                            storeAisleShelf[2],
                             commandWords[3], commandWords[5], commandWords[7], commandWords[9]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Shelf not created", e);
@@ -50,7 +52,8 @@ public class CommandProcessor {
             case "show-shelf":
                 try {
                     String [] storeAisleShelf = commandWords[1].split(":");
-                    return ShowUtil.showShelfDetails(storeModelService, storeAisleShelf[0], storeAisleShelf[1], storeAisleShelf[2]);
+                    return ShowUtil.showShelfDetails(storeModelService, storeAisleShelf[0], storeAisleShelf[1],
+                            storeAisleShelf[2]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Shelf not found", e);
                 }
@@ -78,7 +81,70 @@ public class CommandProcessor {
                     return ExceptionUtil.outputException(lineNumber, "Inventory with the id not found", e);
                 }
             case "update-inventory":
-                    return UpdateUtil.
+                try{
+                    return UpdateUtil.updateInventoryCount(storeModelService, commandWords[1], commandWords[3]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Inventory count not updated", e);
+                }
+            case "define-customer":
+                try{
+                    return CreateUtil.createCustomer(storeModelService, commandWords[1], commandWords[3],
+                            commandWords[3], commandWords[5], commandWords[7], commandWords[9]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Customer not created", e);
+                }
+            case "update-customer":
+                try {
+                    String [] storeAisle = commandWords[3].split(":");
+                    return UpdateUtil.updateCustomerLocation(storeModelService, commandWords[1], storeAisle[0],
+                            storeAisle[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Customer location not updated", e);
+                }
+            case "show-customer":
+                try {
+                    return ShowUtil.showCustomerDetails(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Customer not found", e);
+                }
+            case "define-basket":
+                try {
+                    return CreateUtil.createBasketForACustomer(storeModelService, commandWords[1], commandWords[3]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Basket not created for a customer", e);
+                }
+            case "get-customer-basket":
+                try {
+                    return ShowUtil.showBasketOfACustomer(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Basket of a customer not found", e);
+                }
+            case "add-basket-item":
+                try {
+                    return UpdateUtil.addBasketItem(storeModelService, commandWords[1],
+                            commandWords[3], commandWords[5]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Item not added to basket", e);
+                }
+            case "remove-basket-item":
+                try {
+                    return UpdateUtil.removeItemFromBasket(storeModelService, commandWords[1],
+                            commandWords[3], commandWords[5]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Item not removed from basket", e);
+                }
+            case "clear-basket":
+                try {
+                    return UpdateUtil.clearBasketAndRemoveCustomerAssociation(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Customer's association to basket not removed", e);
+                }
+            case "show-basket-items":
+                try{
+                    return ShowUtil.showBasketItems(storeModelService, commandWords[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Basket not found", e);
+                }
         }
         return DetailsUtil.endOfScript();
     }

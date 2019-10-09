@@ -43,6 +43,20 @@ public class CreateUtil {
         return DetailsUtil.outputConfirmation(String.valueOf(inventory.getInventoryId()));
     }
 
+    public static String createCustomer(IStoreModelService storeModelService, String customerId, String firstName,
+                                        String lastName, String type, String emailAddress, String accountAddress)
+            throws StoreException {
+        Customer customer = storeModelService.createCustomer(customerId, firstName, lastName, type,
+                emailAddress, accountAddress);
+        return DetailsUtil.outputConfirmation(customer.getFirstName());
+    }
+
+    public static String createBasketForACustomer(IStoreModelService storeModelService, String customerId, String basketId) throws StoreException {
+        Basket basketForACustomer = storeModelService.createBasketForACustomer(customerId, basketId);
+        return DetailsUtil.outputConfirmation(basketForACustomer.getBasketId());
+    }
+
+
     public static int convertToInteger(String str){
         return Integer.parseInt(str);
     }

@@ -31,8 +31,8 @@ public class DetailsUtil {
     public static String outputConfirmation(String name) {
         return name + " has been created ";
     }
-    public static String outputUpdateConfirmation(String name) {
-        return name + " has been updated ";
+    public static String outputUpdateConfirmation(String name, String change) {
+        return name + " has been updated. Change is " + change;
     }
 
     public static String endOfScript(){
