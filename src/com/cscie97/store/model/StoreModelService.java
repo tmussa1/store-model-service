@@ -308,5 +308,37 @@ public class StoreModelService implements IStoreModelService {
         return basket.getProductsMap();
     }
 
+    @Override
+    public ISensor createASensor(String sensorId, String sensorName, String sensorType, String storeId,
+                                 String aisleNumber) throws StoreException {
+        InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
+        ISensor sensor = SensorApplianceFactory.createSensor(sensorType, sensorId, sensorName, location);
+        return sensor;
+    }
+
+    @Override
+    public String createSensorEvent(String sensorId, Event event) {
+        return null;
+    }
+
+    @Override
+    public IAppliance createAnAppliance(String applianceId, String applianceName, String applianceType,
+                                        String storeId, String aisleNumber) throws StoreException {
+        InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
+        IAppliance appliance = SensorApplianceFactory.createAppliance(applianceType, applianceId,
+                applianceName, location);
+        return appliance;
+    }
+
+    @Override
+    public String createApplianceEvent(String applianceId, Event event) {
+        return null;
+    }
+
+    @Override
+    public String createApplianceCommand(String applianceId, Command command) {
+        return null;
+    }
+
 
 }

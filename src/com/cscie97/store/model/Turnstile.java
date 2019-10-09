@@ -33,4 +33,16 @@ public class Turnstile implements IAppliance {
     public String getApplianceType() {
         return applianceType;
     }
+
+    @Override
+    public String generateApplianceEvent(Event event) {
+        return this.applianceName + " detected message " + event.getMessage();
+    }
+
+    @Override
+    public String listenToCommand(Command command) {
+        return this.applianceName + " is doing " + command.getMessage();
+    }
+
+
 }

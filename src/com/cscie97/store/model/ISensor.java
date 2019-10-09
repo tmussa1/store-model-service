@@ -9,4 +9,6 @@ public interface ISensor {
     InventoryLocation getSensorLocation();
 
     String getSensorType();
+
+    String generateSensorEvent(Event event);
 }

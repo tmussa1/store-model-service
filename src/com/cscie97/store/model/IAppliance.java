@@ -9,4 +9,8 @@ public interface IAppliance {
     InventoryLocation getApplianceLocation();
 
     String getApplianceType();
+
+    String generateApplianceEvent(Event event);
+
+    String listenToCommand(Command command);
 }

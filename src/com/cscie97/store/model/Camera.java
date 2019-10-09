@@ -34,6 +34,11 @@ public class Camera implements ISensor {
     }
 
     @Override
+    public String generateSensorEvent(Event event) {
+        return this.sensorName + " detected message  " + event.getMessage();
+    }
+
+    @Override
     public String toString() {
         return "Camera{" +
                 "sensorId='" + sensorId + '\'' +

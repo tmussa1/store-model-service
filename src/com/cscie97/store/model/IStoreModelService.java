@@ -45,5 +45,15 @@ public interface IStoreModelService {
     Customer clearBasketAndRemoveAssociationWithACustomer(String basketId) throws StoreException;
 
     Map<Product, Integer> getBasketItems(String basketId) throws StoreException;
+
+    ISensor createASensor(String sensorId, String sensorName, String sensorType, String storeId, String aisleNumber) throws StoreException;
+
+    String createSensorEvent(String sensorId, Event event);
+
+    IAppliance createAnAppliance(String applianceId, String applianceName, String applianceType, String storeId, String aisleNumber) throws StoreException;
+
+    String createApplianceEvent(String applianceId, Event event);
+
+    String createApplianceCommand(String applianceId, Command command);
 }
 

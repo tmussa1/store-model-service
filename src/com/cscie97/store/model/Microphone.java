@@ -33,4 +33,9 @@ public class Microphone implements ISensor {
     public String getSensorType() {
         return type;
     }
+
+    @Override
+    public String generateSensorEvent(Event event) {
+        return this.sensorName + " detected message " + event.getMessage();
+    }
 }

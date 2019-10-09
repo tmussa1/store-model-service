@@ -35,6 +35,11 @@ public class Robot implements ISensor, IAppliance {
     }
 
     @Override
+    public String generateSensorEvent(Event event) {
+        return this.sensorName + " detected message " + event.getMessage();
+    }
+
+    @Override
     public String getApplianceId() {
         return getSensorId();
     }
@@ -52,5 +57,15 @@ public class Robot implements ISensor, IAppliance {
     @Override
     public String getApplianceType() {
         return getSensorType();
+    }
+
+    @Override
+    public String generateApplianceEvent(Event event) {
+        return this.getApplianceName() + " detected message " + event.getMessage();
+    }
+
+    @Override
+    public String listenToCommand(Command command) {
+        return this.getApplianceName() + " is doing " + command.getMessage();
     }
 }
