@@ -2,6 +2,7 @@ package com.cscie97.store.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Aisle {
 
@@ -18,6 +19,7 @@ public class Aisle {
         this.location = location;
         this.shelves = new ArrayList<>();
         this.sensors = new ArrayList<>();
+        this.appliances = new ArrayList<>();
     }
 
     public void addShelfToAisle(Shelf shelf){
@@ -38,10 +40,14 @@ public class Aisle {
                 .findAny().get();
     }
 
-    public IAppliance getApplianceById(String applianceId){
-        return this.appliances.stream()
-                .filter(appliance -> appliance.getApplianceId().equals(applianceId))
-                .findAny().get();
+    public IAppliance getApplianceById(String applianceId) throws StoreException {
+        Optional<IAppliance> appliance = this.appliances.stream()
+                .filter(applian -> applian.getApplianceId().equals(applianceId))
+                .findAny();
+        if(appliance.isEmpty()){
+            throw new StoreException("Appliance with requested id doesn't exist");
+        }
+        return appliance.get();
     }
 
     public String getAisleNumber() {

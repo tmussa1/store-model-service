@@ -35,8 +35,8 @@ public class DetailsUtil {
         return name + " has been updated. Change is " + change;
     }
 
-    public static String endOfScript(){
-        return "Congratulations!!! End of script";
+    public static String beginOfScript(){
+        return "=====================================Welcome====================================================";
     }
 
 

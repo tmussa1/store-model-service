@@ -4,7 +4,7 @@ import com.cscie97.store.model.StoreException;
 
 public class ExceptionUtil {
 
-    public static String outputException(int lineNumber, String failure, StoreException exception) {
+    public static String outputException(int lineNumber, String failure, Exception exception) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(System.getProperty("line.separator"));
         stringBuffer.append("Command failed at " + lineNumber);

@@ -201,7 +201,7 @@ public class CommandProcessor {
                     return ExceptionUtil.outputException(lineNumber, "Appliance command not sent", e);
                 }
             default:
-                return DetailsUtil.endOfScript();
+                return DetailsUtil.beginOfScript();
         }
 
     }

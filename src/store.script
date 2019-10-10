@@ -82,7 +82,6 @@ add-basket-item b3 product prod12 item_count 7
 remove-basket-item b1 product prod10 item_count 1
 remove-basket-item b3 product prod12 item_count 5
 clear-basket b3
-show-basket-items b3 
 show-basket-items b1
 define-sensor mic_A1 name MicrophoneA1 type microphone location store_123:aisle_A2
 define-sensor cam_A1 name CameraA1 type camera location store_123:aisle_A2

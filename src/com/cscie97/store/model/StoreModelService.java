@@ -30,7 +30,6 @@ public class StoreModelService implements IStoreModelService {
         checkValidityOfStoreId(storeId);
         Store store = new Store(storeId, storeName, storeAddress);
         this.stores.add(store);
-        System.out.println("Stores " + stores);
         return store;
     }
 
@@ -65,11 +64,11 @@ public class StoreModelService implements IStoreModelService {
     @Override
     public Aisle getAisleByStoreIdAndAisleNumber(String storeId, String aisleNumber) throws StoreException {
         Store store = getStoreById(storeId);
-        Aisle aisle = store.getAisles().stream().filter(anAisle -> anAisle.getAisleNumber().equals(aisleNumber)).findAny().get();
-        if(aisle == null){
+        Optional<Aisle> aisle = store.getAisles().stream().filter(anAisle -> anAisle.getAisleNumber().equals(aisleNumber)).findAny();
+        if(aisle.isEmpty()){
             throw new StoreException("An aisle with the requested id doesn't exist");
         }
-        return aisle;
+        return aisle.get();
     }
 
     @Override
@@ -219,13 +218,22 @@ public class StoreModelService implements IStoreModelService {
     }
 
     private Customer getCustomerAssociatedWithABasket(String basketId) throws StoreException {
-        Optional<Customer> customer = customers.stream()
-                .filter(aCustomer -> aCustomer.getBasket().getBasketId().equalsIgnoreCase(basketId))
-                .findAny();
-        if(customer.isEmpty()){
+
+        Customer customer = findCustomerWithBasketId(basketId);
+        if(customer == null){
             throw new StoreException("There is no customer associated with this basket id");
         }
-        return customer.get();
+        return customer;
+    }
+
+    private Customer findCustomerWithBasketId(String basketId) {
+        for(int i = 0; i < customers.size(); i++){
+            if(customers.get(i).getBasket() != null &&
+                    customers.get(i).getBasket().getBasketId().equalsIgnoreCase(basketId)){
+                return customers.get(i);
+            }
+        }
+        return null;
     }
 
     @Override
@@ -322,7 +330,11 @@ public class StoreModelService implements IStoreModelService {
                                  String aisleNumber) throws StoreException {
         InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
         ISensor sensor = SensorApplianceFactory.createSensor(sensorType, sensorId, sensorName, location);
-        getAisleByStoreIdAndAisleNumber(storeId, aisleNumber).addSensorToShelf(sensor);
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        aisle.addSensorToShelf(sensor);
+        Store store = getStoreById(storeId);
+        store.addAisleToAStore(aisle);
+        this.stores.add(store);
         return sensor;
     }
 
@@ -355,7 +367,11 @@ public class StoreModelService implements IStoreModelService {
         InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
         IAppliance appliance = SensorApplianceFactory.createAppliance(applianceType, applianceId,
                 applianceName, location);
-        getAisleByStoreIdAndAisleNumber(storeId, aisleNumber).addApplianceToShelf(appliance);
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        aisle.addApplianceToShelf(appliance);
+        Store store = getStoreById(storeId);
+        store.addAisleToAStore(aisle);
+        this.stores.add(store);
         return appliance;
     }
 
