@@ -21,6 +21,7 @@ public class CommandProcessor {
                    }
             case "show-store":
                 try {
+                    System.out.println(commandWords[1]);
                     return ShowUtil.showStoreDetails(storeModelService ,commandWords[1]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Store not found", e);
@@ -67,10 +68,10 @@ public class CommandProcessor {
                     return ExceptionUtil.outputException(lineNumber, "Product not found", e);
                 }
             case "define-inventory":
-                String [] storeAisleShelf = commandWords[3].split(":");
                 try {
-                    return CreateUtil.createInventory(storeModelService, storeAisleShelf[0], storeAisleShelf[1],
-                            storeAisleShelf[2],  commandWords[3], commandWords[5], commandWords[7], commandWords[9]);
+                    String [] storeAisleShelf = commandWords[3].split(":");
+                    return CreateUtil.createInventory(storeModelService, commandWords[1], storeAisleShelf[0], storeAisleShelf[1],
+                            storeAisleShelf[2],  commandWords[5], commandWords[7], commandWords[9]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Inventory creation failed", e);
                 }
@@ -109,7 +110,7 @@ public class CommandProcessor {
                 }
             case "define-basket":
                 try {
-                    return CreateUtil.createBasketForACustomer(storeModelService, commandWords[1], commandWords[3]);
+                    return CreateUtil.createBasketForACustomer(storeModelService, commandWords[3], commandWords[1]);
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Basket not created for a customer", e);
                 }
@@ -199,8 +200,10 @@ public class CommandProcessor {
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Appliance command not sent", e);
                 }
+            default:
+                return DetailsUtil.endOfScript();
         }
-        return DetailsUtil.endOfScript();
+
     }
 
 

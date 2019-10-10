@@ -47,7 +47,7 @@ public class ShowUtil {
             throws StoreException {
         Customer customer = storeModelService.getCustomerById(customerId);
         return DetailsUtil.outputDetails("Customer ", customer.getFirstName(), customer.getCustomerLocation().getAisleNumber(),
-                List.copyOf(customer.getBasket().getProductsMap().keySet()));
+                List.of(customer.getEmailAddress()));
     }
 
     public static String showBasketOfACustomer(IStoreModelService storeModelService, String customerId)

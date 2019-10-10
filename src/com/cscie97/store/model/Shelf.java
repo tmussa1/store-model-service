@@ -2,6 +2,7 @@ package com.cscie97.store.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Shelf {
     private String shelfId;
@@ -30,13 +31,13 @@ public class Shelf {
     }
 
     public Inventory getInventoryInTheShelfByInventoryId(String inventoryId) throws StoreException {
-        Inventory inventory = this.inventoryList.stream()
+        Optional<Inventory> inventory = this.inventoryList.stream()
                 .filter(anInventory -> anInventory.getInventoryId().equals(inventoryId))
-                .findAny().get();
-        if(inventory == null){
-            throw new StoreException("An inventory with the requested id doesn't exist");
+                .findAny();
+        if(!inventory.isEmpty()){
+            return inventory.get();
         }
-        return inventory;
+        return null;
     }
 
     public String getShelfId() {

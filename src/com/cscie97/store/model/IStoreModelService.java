@@ -16,7 +16,7 @@ public interface IStoreModelService {
 
     Shelf getShelfByStoreIdAisleNumShelfId(String storeId, String aisleNumber, String shelfId) throws StoreException;
 
-    Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException;
+    Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, String productId) throws StoreException;
 
     Inventory getInventoryById(String inventoryId) throws StoreException;
 

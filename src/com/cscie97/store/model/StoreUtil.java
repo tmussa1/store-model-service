@@ -1,5 +1,7 @@
 package com.cscie97.store.model;
 
+import java.util.List;
+
 public class StoreUtil {
 
     /**

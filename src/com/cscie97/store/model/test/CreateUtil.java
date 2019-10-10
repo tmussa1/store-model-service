@@ -39,7 +39,7 @@ public class CreateUtil {
                                          String aisleNumber, String shelfId, String capacity,
                                          String count, String productId) throws StoreException {
         Inventory inventory = storeModelService.createInventory(inventoryId, storeId, aisleNumber,
-                shelfId, convertToInteger(capacity), convertToInteger(count), convertToInteger(productId));
+                shelfId, convertToInteger(capacity), convertToInteger(count), productId);
         return DetailsUtil.outputConfirmation(String.valueOf(inventory.getInventoryId()));
     }
 

@@ -1,6 +1,7 @@
 package com.cscie97.store.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StoreModelService implements IStoreModelService {
 
@@ -27,19 +28,25 @@ public class StoreModelService implements IStoreModelService {
     @Override
     public Store createAStore(String storeId, String storeName, Address storeAddress) throws StoreException {
         checkValidityOfStoreId(storeId);
-        return new Store(storeId, storeName, storeAddress);
+        Store store = new Store(storeId, storeName, storeAddress);
+        this.stores.add(store);
+        System.out.println("Stores " + stores);
+        return store;
     }
 
     private void checkValidityOfStoreId(String storeId) throws StoreException {
-        Store duplicateStore = this.stores.stream().filter(store -> store.getStoreId().equals(storeId)).findAny().get();
-        if(duplicateStore != null){
+        Optional<Store> duplicateStore = this.stores.stream().filter(store -> store.getStoreId().equalsIgnoreCase(storeId))
+                .findAny();
+        if(!duplicateStore.isEmpty()){
             throw new StoreException("Duplicate Store with the ID provided exists. Store creation failed");
         }
     }
 
     @Override
     public Store getStoreById(String storeId) throws StoreException {
-        Store store = this.stores.stream().filter(astore -> astore.getStoreId().equals(storeId)).findAny().get();
+
+        Store store = stores.stream().filter(astore -> astore.getStoreId().equalsIgnoreCase(storeId))
+                .collect(Collectors.toList()).get(0);
         if(store == null){
             throw new StoreException("A store with the requested id doesn't exist");
         }
@@ -86,7 +93,7 @@ public class StoreModelService implements IStoreModelService {
     }
 
     @Override
-    public Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, int productId) throws StoreException {
+    public Inventory createInventory(String inventoryId, String storeId, String aisleNumber, String shelfId, int capacity, int count, String productId) throws StoreException {
         Product product = productMap.get(productId);
         if(product == null){
             throw new StoreException("Inventory can not be created for a product that is not defined");
@@ -155,11 +162,11 @@ public class StoreModelService implements IStoreModelService {
     }
 
     private void duplicateCustomerValidation(String customerId, String accountAddress) throws StoreException {
-        Customer duplicateCustomer = this.customers.stream()
+        Optional<Customer> duplicateCustomer = this.customers.stream()
                 .filter(aCustomer -> aCustomer.getCustomerId().equals(customerId)
                         && aCustomer.getAccountAddress().equals(accountAddress))
-                .findAny().get();
-        if(duplicateCustomer != null){
+                .findAny();
+        if(!duplicateCustomer.isEmpty()){
             throw new StoreException("A customer with the same id and account address exists");
         }
     }
@@ -175,12 +182,12 @@ public class StoreModelService implements IStoreModelService {
 
     @Override
     public Customer getCustomerById(String customerId) throws StoreException {
-        Customer customer = this.customers.stream().filter(aCustomer ->
-                aCustomer.getCustomerId().equals(customerId)).findAny().get();
-        if(customer == null){
+        Optional<Customer> customer = this.customers.stream().filter(aCustomer ->
+                aCustomer.getCustomerId().equals(customerId)).findAny();
+        if(customer.isEmpty()){
             throw new StoreException("A customer with the requested id doesn't exist");
         }
-        return customer;
+        return customer.get();
     }
 
     @Override
@@ -198,6 +205,7 @@ public class StoreModelService implements IStoreModelService {
         if(basket == null){
             customer.setBasket(createBasketForACustomer(customerId, UUID.randomUUID().toString()));
         }
+        this.customers.add(customer);
         return customer.getBasket();
     }
 
@@ -206,17 +214,18 @@ public class StoreModelService implements IStoreModelService {
         Customer customer = getCustomerById(customerId);
         Basket basket = new Basket(basketId);
         customer.setBasket(basket);
+        this.customers.add(customer);
         return customer.getBasket();
     }
 
     private Customer getCustomerAssociatedWithABasket(String basketId) throws StoreException {
-        Customer customer = this.customers.stream()
-                .filter(aCustomer -> aCustomer.getBasket().getBasketId().equals(basketId))
-                .findAny().get();
-        if(customer == null){
+        Optional<Customer> customer = customers.stream()
+                .filter(aCustomer -> aCustomer.getBasket().getBasketId().equalsIgnoreCase(basketId))
+                .findAny();
+        if(customer.isEmpty()){
             throw new StoreException("There is no customer associated with this basket id");
         }
-        return customer;
+        return customer.get();
     }
 
     @Override
