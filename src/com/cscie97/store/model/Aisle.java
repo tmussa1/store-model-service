@@ -32,6 +32,18 @@ public class Aisle {
         this.appliances.add(appliance);
     }
 
+    public ISensor getSensorById(String sensorId){
+        return this.sensors.stream()
+                .filter(sensor -> sensor.getSensorId().equals(sensorId))
+                .findAny().get();
+    }
+
+    public IAppliance getApplianceById(String applianceId){
+        return this.appliances.stream()
+                .filter(appliance -> appliance.getApplianceId().equals(applianceId))
+                .findAny().get();
+    }
+
     public String getAisleNumber() {
         return aisleNumber;
     }

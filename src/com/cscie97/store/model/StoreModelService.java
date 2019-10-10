@@ -313,12 +313,31 @@ public class StoreModelService implements IStoreModelService {
                                  String aisleNumber) throws StoreException {
         InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
         ISensor sensor = SensorApplianceFactory.createSensor(sensorType, sensorId, sensorName, location);
+        getAisleByStoreIdAndAisleNumber(storeId, aisleNumber).addSensorToShelf(sensor);
         return sensor;
     }
 
     @Override
-    public String createSensorEvent(String sensorId, Event event) {
-        return null;
+    public ISensor getSensorByLocationAndSensorId(String storeId, String aisleNumber, String sensorId)
+            throws StoreException {
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        ISensor sensor = aisle.getSensorById(sensorId);
+        return sensor;
+    }
+
+    @Override
+    public IAppliance getApplianceByLocationAndSensorId(String storeId, String aisleNumber, String applianceId)
+            throws StoreException {
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        IAppliance appliance = aisle.getApplianceById(applianceId);
+        return appliance;
+    }
+
+    @Override
+    public String createSensorEvent(String storeId, String aisleNumber, String sensorId, Event event)
+            throws StoreException {
+        ISensor sensor = getSensorByLocationAndSensorId(storeId, aisleNumber, sensorId);
+        return sensor.generateSensorEvent(event);
     }
 
     @Override
@@ -327,17 +346,22 @@ public class StoreModelService implements IStoreModelService {
         InventoryLocation location = new InventoryLocation(storeId, aisleNumber, "");
         IAppliance appliance = SensorApplianceFactory.createAppliance(applianceType, applianceId,
                 applianceName, location);
+        getAisleByStoreIdAndAisleNumber(storeId, aisleNumber).addApplianceToShelf(appliance);
         return appliance;
     }
 
     @Override
-    public String createApplianceEvent(String applianceId, Event event) {
-        return null;
+    public String createApplianceEvent(String storeId, String aisleNumber, String applianceId, Event event) throws StoreException {
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        IAppliance appliance = aisle.getApplianceById(applianceId);
+        return appliance.generateApplianceEvent(event);
     }
 
     @Override
-    public String createApplianceCommand(String applianceId, Command command) {
-        return null;
+    public String createApplianceCommand(String storeId, String aisleNumber, String applianceId, Command command) throws StoreException {
+        Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
+        IAppliance appliance = aisle.getApplianceById(applianceId);
+        return appliance.listenToCommand(command);
     }
 
 

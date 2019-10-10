@@ -8,7 +8,7 @@ import java.io.*;
 
 public class CommandProcessor {
 
-    private String processCommand(IStoreModelService storeModelService, String command, int lineNumber) {
+    private String processCommand(IStoreModelService storeModelService, String command, int lineNumber)  {
         String [] commandWords = command.split(" ");
 
         switch(commandWords[0].toLowerCase()){
@@ -145,6 +145,60 @@ public class CommandProcessor {
                 } catch (StoreException e) {
                     return ExceptionUtil.outputException(lineNumber, "Basket not found", e);
                 }
+            case "define-sensor":
+                try {
+                    String [] storeAisle = commandWords[7].split(":");
+                    return CreateUtil.createSensor(storeModelService, commandWords[1], commandWords[3],
+                            commandWords[5], storeAisle[0], storeAisle[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Sensor creation failed", e);
+                }
+            case "show-sensor":
+                try{
+                    String [] storeAisle = commandWords[3].split(":");
+                    return ShowUtil.showSensor(storeModelService, storeAisle[0], storeAisle[1], commandWords[1]);
+                }catch(StoreException e){
+                    return ExceptionUtil.outputException(lineNumber, "Sensor not found", e);
+                }
+            case "create-sensor-event":
+                try{
+                    String [] storeAisle = commandWords[3].split(":");
+                    return CreateUtil.createSensorEvent(storeModelService,storeAisle[0], storeAisle[1], commandWords[1],
+                            command);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Sensor event not created", e);
+                }
+            case "define-appliance":
+                try{
+                    String [] storeAisle = commandWords[7].split(":");
+                    return CreateUtil.createAnAppliance(storeModelService, commandWords[1],
+                            commandWords[3], commandWords[5], storeAisle[0], storeAisle[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Appliance not created", e);
+                }
+            case "show-appliance":
+                try{
+                    String [] storeAisle = commandWords[3].split(":");
+                    return ShowUtil.showAppliance(storeModelService, commandWords[1], storeAisle[0], storeAisle[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Appliance not found", e);
+                }
+            case "create-appliance-event":
+                try{
+                    String [] storeAisle = commandWords[5].split(":");
+                    return CreateUtil.createApplianceEvent(storeModelService, commandWords[1],
+                            commandWords[3], storeAisle[0], storeAisle[1]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Appliance event not created", e);
+                }
+            case "create-appliance-command":
+                try{
+                    String [] storeAisle = commandWords[5].split(":");
+                    return CreateUtil.createApplianceCommand(storeModelService, storeAisle[0], storeAisle[1],
+                            commandWords[1], commandWords[3]);
+                } catch (StoreException e) {
+                    return ExceptionUtil.outputException(lineNumber, "Appliance command not sent", e);
+                }
         }
         return DetailsUtil.endOfScript();
     }
@@ -166,7 +220,7 @@ public class CommandProcessor {
 
             while((command = bufferedReader.readLine()) != null){
                 lineNumber++;
-                processCommand(storeModelService, command, lineNumber);
+                System.out.println(processCommand(storeModelService, command, lineNumber));
             }
 
         }  catch (IOException e) {

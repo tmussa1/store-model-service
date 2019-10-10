@@ -65,8 +65,22 @@ public class ShowUtil {
             return DetailsUtil.outputDetails("Basket is empty ", basketId,
                     "The basket is not associated with any customer", Collections.emptyList());
         }
-        return DetailsUtil.outputDetails(" Basket ", basketId, " contains items ",
+        return DetailsUtil.outputDetails("Basket ", basketId, " contains items ",
                 List.copyOf(basketItems.keySet()));
+    }
+
+    public static String showSensor(IStoreModelService storeModelService, String storeId, String aisleNumber,
+                             String sensorId) throws StoreException {
+        ISensor sensor = storeModelService.getSensorByLocationAndSensorId(storeId, aisleNumber, sensorId);
+        return DetailsUtil.outputDetails("Sensor ", sensor.getSensorName(), " contains items ",
+                List.of(sensor));
+    }
+
+    public static String showAppliance(IStoreModelService storeModelService, String applianceId, String storeId,
+                                       String aisleNumber) throws StoreException {
+        IAppliance appliance = storeModelService.getApplianceByLocationAndSensorId(storeId, aisleNumber, applianceId);
+        return DetailsUtil.outputDetails("Applaince ", appliance.getApplianceName(),
+                " contains items ", List.of(appliance));
     }
 
 }

@@ -48,12 +48,16 @@ public interface IStoreModelService {
 
     ISensor createASensor(String sensorId, String sensorName, String sensorType, String storeId, String aisleNumber) throws StoreException;
 
-    String createSensorEvent(String sensorId, Event event);
+    ISensor getSensorByLocationAndSensorId(String storeId, String aisleNumber, String sensorId) throws StoreException;
+
+    IAppliance getApplianceByLocationAndSensorId(String storeId, String aisleNumber, String applianceId) throws StoreException;
+
+    String createSensorEvent(String storeId, String aisleNumber, String sensorId, Event event) throws StoreException;
 
     IAppliance createAnAppliance(String applianceId, String applianceName, String applianceType, String storeId, String aisleNumber) throws StoreException;
 
-    String createApplianceEvent(String applianceId, Event event);
+    String createApplianceEvent(String storeId, String aisleNumber, String applianceId, Event event) throws StoreException;
 
-    String createApplianceCommand(String applianceId, Command command);
+    String createApplianceCommand(String storeId, String aisleNumber, String applianceId, Command command) throws StoreException;
 }
 

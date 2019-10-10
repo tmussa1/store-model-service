@@ -51,11 +51,47 @@ public class CreateUtil {
         return DetailsUtil.outputConfirmation(customer.getFirstName());
     }
 
-    public static String createBasketForACustomer(IStoreModelService storeModelService, String customerId, String basketId) throws StoreException {
+    public static String createBasketForACustomer(IStoreModelService storeModelService, String customerId,
+                                                  String basketId) throws StoreException {
         Basket basketForACustomer = storeModelService.createBasketForACustomer(customerId, basketId);
         return DetailsUtil.outputConfirmation(basketForACustomer.getBasketId());
     }
 
+    public static String createSensor(IStoreModelService storeModelService, String sensorId, String sensorName,
+                                      String sensorType, String storeId, String aisleNumber) throws StoreException {
+        ISensor sensor = storeModelService.createASensor(sensorId, sensorName, sensorType, storeId, aisleNumber);
+        return DetailsUtil.outputConfirmation(sensor.getSensorName());
+    }
+
+    public static String createSensorEvent(IStoreModelService storeModelService, String storeId, String aisleNumber,
+                                           String sensorId, String command) throws StoreException {
+        Event event = new Event(command);
+        String eventReturned = storeModelService.createSensorEvent(storeId, aisleNumber, sensorId, event);
+        return DetailsUtil.outputConfirmation(eventReturned);
+    }
+
+    public static String createAnAppliance(IStoreModelService storeModelService, String applianceId,
+                                           String applianceName, String applianceType, String storeId,
+                                           String aisleNumber) throws StoreException {
+        IAppliance appliance = storeModelService.createAnAppliance(applianceId, applianceName,
+                applianceType, storeId, aisleNumber);
+        return DetailsUtil.outputConfirmation(appliance.getApplianceName());
+    }
+
+    public static String createApplianceEvent(IStoreModelService storeModelService,
+                                              String applianceId, String message, String storeId,
+                                              String aisleNumber) throws StoreException {
+        Event event = new Event(message);
+        String applianceEvent = storeModelService.createApplianceEvent(storeId, aisleNumber, applianceId, event);
+        return DetailsUtil.outputConfirmation(applianceEvent);
+    }
+
+    public static String createApplianceCommand(IStoreModelService storeModelService, String storeId, String aisleNumber,
+                                         String applianceId, String message) throws StoreException {
+        Command command = new Command(message);
+        String applianceCommand = storeModelService.createApplianceCommand(storeId, aisleNumber, applianceId, command);
+        return DetailsUtil.outputConfirmation(applianceCommand);
+    }
 
     public static int convertToInteger(String str){
         return Integer.parseInt(str);
