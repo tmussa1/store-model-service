@@ -11,7 +11,7 @@ public class Speaker implements IAppliance {
         this.applianceId = applianceId;
         this.applianceName = applianceName;
         this.applianceLocation = applianceLocation;
-        this.applianceId = this.getClass().getName();
+        this.applianceType = this.getClass().getName();
     }
 
     @Override

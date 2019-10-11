@@ -332,9 +332,6 @@ public class StoreModelService implements IStoreModelService {
         ISensor sensor = SensorApplianceFactory.createSensor(sensorType, sensorId, sensorName, location);
         Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
         aisle.addSensorToShelf(sensor);
-        Store store = getStoreById(storeId);
-        store.addAisleToAStore(aisle);
-        this.stores.add(store);
         return sensor;
     }
 
@@ -369,9 +366,6 @@ public class StoreModelService implements IStoreModelService {
                 applianceName, location);
         Aisle aisle = getAisleByStoreIdAndAisleNumber(storeId, aisleNumber);
         aisle.addApplianceToShelf(appliance);
-        Store store = getStoreById(storeId);
-        store.addAisleToAStore(aisle);
-        this.stores.add(store);
         return appliance;
     }
 
